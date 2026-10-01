@@ -1,5 +1,6 @@
 #include <iostream>
 #include <iomanip>
+#include <string>
 
 using namespace std;
 
@@ -12,6 +13,20 @@ void meniu() {
     cout << "3. Valiutos pardavimas (pasirinkta valiuta -> EUR)" << endl;
     cout << "4. Iseiti" << endl;
     cout << "Veiksmas: ";
+}
+
+void valiutuMeniu() {
+    cout << endl;
+    cout << "1 - GBP" << endl;
+    cout << "2 - USD" << endl;
+    cout << "3 - INR" << endl;
+    cout << "Pasirinkite valiuta: ";
+}
+
+void palygintiKursa(string valiutosPavadinimas, double bendrasKursas) {
+    cout << endl;
+    cout << "1 EUR = " << bendrasKursas << " " << valiutosPavadinimas << endl;
+    cout << "1 " << valiutosPavadinimas << " = " << 1 / bendrasKursas << " EUR" << endl;
 }
 
 int main() {
@@ -41,6 +56,37 @@ int main() {
             cout << "Programa uzdaryta" << endl;
         } else if (veiksmas < 1 || veiksmas > 4) {
             cout << "Tokio veiksmo nera. Pasirinkite nuo 1 iki 4." << endl;
+        } else {
+            int valiuta;
+            valiutuMeniu();
+            cin >> valiuta;
+
+            string valiutosPavadinimas;
+            double bendrasKursas;
+            bool teisingaValiuta = true;
+
+            if (valiuta == 1) {
+                valiutosPavadinimas = "GBP";
+                bendrasKursas = GBP_Bendras;
+            } else if (valiuta == 2) {
+                valiutosPavadinimas = "USD";
+                bendrasKursas = USD_Bendras;
+            } else if (valiuta == 3) {
+                valiutosPavadinimas = "INR";
+                bendrasKursas = INR_Bendras;
+            } else {
+                teisingaValiuta = false;
+            }
+
+            if (!teisingaValiuta) {
+                cout << "Tokios valiutos nera. Pasirinkite nuo 1 iki 3." << endl;
+            } else {
+                switch (veiksmas) {
+                    case 1:
+                        palygintiKursa(valiutosPavadinimas, bendrasKursas);
+                        break;
+                }
+            }
         }
     } while (veiksmas != 4);
 
