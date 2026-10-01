@@ -29,6 +29,38 @@ void palygintiKursa(string valiutosPavadinimas, double bendrasKursas) {
     cout << "1 " << valiutosPavadinimas << " = " << 1 / bendrasKursas << " EUR" << endl;
 }
 
+void pirktiValiuta(string valiutosPavadinimas, double pirkimoKursas) {
+    double suma;
+    cout << "Iveskite suma eurais: ";
+    cin >> suma;
+
+    if (suma <= 0) {
+        cout << "Neteisinga suma. Ji turi buti didesne uz 0." << endl;
+    } else {
+        double rezultatas = suma * pirkimoKursas;
+        cout << endl;
+        cout << "Pradine suma: " << suma << " EUR" << endl;
+        cout << "Valiuta: " << valiutosPavadinimas << endl;
+        cout << "Gausite: " << rezultatas << " " << valiutosPavadinimas << endl;
+    }
+}
+
+void parduotiValiuta(string valiutosPavadinimas, double pardavimoKursas) {
+    double suma;
+    cout << "Iveskite parduodama suma (" << valiutosPavadinimas << "): ";
+    cin >> suma;
+
+    if (suma <= 0) {
+        cout << "Neteisinga suma. Ji turi buti didesne uz 0." << endl;
+    } else {
+        double rezultatas = suma / pardavimoKursas;
+        cout << endl;
+        cout << "Pradine suma: " << suma << " " << valiutosPavadinimas << endl;
+        cout << "Valiuta: " << valiutosPavadinimas << endl;
+        cout << "Gausite: " << rezultatas << " EUR" << endl;
+    }
+}
+
 int main() {
     // Valiutu kursai kiek gaunama uz 1Eur
     const double GBP_Bendras = 0.8729;
@@ -63,17 +95,25 @@ int main() {
 
             string valiutosPavadinimas;
             double bendrasKursas;
+            double pirkimoKursas;
+            double pardavimoKursas;
             bool teisingaValiuta = true;
 
             if (valiuta == 1) {
                 valiutosPavadinimas = "GBP";
                 bendrasKursas = GBP_Bendras;
+                pirkimoKursas = GBP_Pirkti;
+                pardavimoKursas = GBP_Parduoti;
             } else if (valiuta == 2) {
                 valiutosPavadinimas = "USD";
                 bendrasKursas = USD_Bendras;
+                pirkimoKursas = USD_Pirkti;
+                pardavimoKursas = USD_Parduoti;
             } else if (valiuta == 3) {
                 valiutosPavadinimas = "INR";
                 bendrasKursas = INR_Bendras;
+                pirkimoKursas = INR_Pirkti;
+                pardavimoKursas = INR_Parduoti;
             } else {
                 teisingaValiuta = false;
             }
@@ -84,6 +124,12 @@ int main() {
                 switch (veiksmas) {
                     case 1:
                         palygintiKursa(valiutosPavadinimas, bendrasKursas);
+                        break;
+                    case 2:
+                        pirktiValiuta(valiutosPavadinimas, pirkimoKursas);
+                        break;
+                    case 3:
+                        parduotiValiuta(valiutosPavadinimas, pardavimoKursas);
                         break;
                 }
             }
